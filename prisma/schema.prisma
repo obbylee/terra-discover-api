@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String  @id @default(cuid())
+  username       String  @unique
+  email          String  @unique
+  passwordHash   String
+  profilePicture String?
+  bio            String? @db.Text
+
+  submittedSpaces Space[] @relation("SubmittedSpaces") // Spaces submitted by this user
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Space {
+  id             String   @id @default(cuid())
+  name           String
+  slug           String   @unique
+  alternateNames String[]
+  description    String   @db.Text
+  activities     String[] // Suggested activities: "picnic", "photography", "people_watching"
+
+  // Optional fields for historical or architectural significance
+  historicalContext  String? @db.Text
+  architecturalStyle String? @db.VarChar(100)
+
+  // Operational details (JSON for flexibility)
+  operatingHours Json? // e.g., { "daily": "09:00-22:00", "notes": "Varies seasonally" }
+  entranceFee    Json? // e.g., { "amount": 0, "currency": "USD", "notes": "Free entry" }
+  contactInfo    Json? // e.g., { "phone": "...", "email": "...", "website": "..." }
+  accessibility  Json? // e.g., { "wheelchair_accessible": true, "notes": "..." }
+
+  typeId String // Foreign key for SpaceType
+  type   SpaceType @relation(fields: [typeId], references: [id])
+
+  categories SpaceCategory[]
+  features   SpaceFeature[]
+
+  // User contribution and moderation
+  submittedById String
+  submittedBy   User   @relation("SubmittedSpaces", fields: [submittedById], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([typeId]) // Index for efficient querying by type
+}
+
+// Model for Space Types (e.g., park, plaza, hidden_gem, landmark)
+model SpaceType {
+  id          String  @id @default(cuid())
+  name        String  @unique @db.VarChar(100) // e.g., "Park", "Plaza", "Hidden Gem"
+  description String? @db.Text
+
+  spaces Space[]
+}
+
+// Model for Space Categories (e.g., historical, recreational, architectural, natural)
+model SpaceCategory {
+  id          String  @id @default(cuid())
+  name        String  @unique @db.VarChar(100) // e.g., "Historical", "Recreational"
+  description String? @db.Text
+
+  spaces Space[]
+}
+
+// Model for Space Features (e.g., Wi-Fi, Playground, Wheelchair Accessible)
+model SpaceFeature {
+  id          String  @id @default(cuid())
+  name        String  @unique @db.VarChar(100) // e.g., "Wi-Fi", "Playground", "Restrooms"
+  description String? @db.Text
+
+  spaces Space[]
+}

@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.OPTIONS = exports.PUT = exports.PATCH = exports.POST = exports.GET = void 0;
+var vercel_1 = require("hono/vercel");
+var src_1 = require("../src");
+var handler = (0, vercel_1.handle)(src_1.default);
+exports.GET = handler;
+exports.POST = handler;
+exports.PATCH = handler;
+exports.PUT = handler;
+exports.OPTIONS = handler;
