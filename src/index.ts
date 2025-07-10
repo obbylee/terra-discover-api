@@ -21,9 +21,7 @@ app.get(
   Scalar({
     pageTitle: "Terra Discover API Documentation",
     theme: "default",
-    spec: {
-      url: "/api/openapi.json",
-    },
+    url: "/api/openapi.json",
   })
 );
 

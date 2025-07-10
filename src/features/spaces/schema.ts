@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const JsonValueSchema = z
-  .record(z.any())
+  .any()
   .nullable()
   .optional()
   .openapi({
