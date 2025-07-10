@@ -4,6 +4,10 @@
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "skipLibCheck": true, 
+    "target": "ESNext", 
+    "module": "ESNext", 
+    "moduleResolution": "bundler", 
+    "esModuleInterop": true, 
   },
    "exclude": [
     "node_modules", "src/generated",
