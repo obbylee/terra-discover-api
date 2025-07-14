@@ -3,12 +3,10 @@
     "strict": true,
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
-    "target": "ESNext",
-    "module": "ESNext",        
-    "moduleResolution": "nodenext",
-    "esModuleInterop": true,     
-    "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "outDir": "dist"
-  }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": [
+    "node_modules", "src/generated"
+  ]
 }

@@ -5,6 +5,9 @@ import { Scalar } from "@scalar/hono-api-reference";
 import { userRoutes } from "./features/users/route";
 import { authRoutes } from "./features/auth/route";
 import { spaceRoutes } from "./features/spaces/route";
+import { featureRoutes } from "./features/spaceFeature/route";
+import { categoryRoutes } from "./features/spaceCategory/route";
+import { typeRoutes } from "./features/spaceType/route";
 
 const app = new OpenAPIHono().basePath("/api");
 
@@ -61,5 +64,8 @@ app.get("/", (c) => {
 app.route("/users", userRoutes);
 app.route("/auth", authRoutes);
 app.route("/spaces", spaceRoutes);
+app.route("/features", featureRoutes);
+app.route("/categories", categoryRoutes);
+app.route("/types", typeRoutes);
 
 export default app;
