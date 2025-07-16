@@ -11,6 +11,7 @@
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio",
     "typecheck": "bunx tsc --noEmit",
+    "start:migrate:production": "bun prisma migrate deploy && bun run src/index.ts",
     "postinstall": "bunx prisma generate"
   },
   "prisma": {

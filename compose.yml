@@ -3,7 +3,26 @@ services:
     container_name: terra_discover_api
     image: postgres:alpine
     ports:
-      - '${POSTGRES_HOST_PORT}:5432'
+      - '5432:5432'
     env_file:
       - path: .env
         required: true
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d postgres -U terradiscoverapi"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: terra_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      database:
+        condition: service_healthy
+
+volumes:
+  terra_app:
