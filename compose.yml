@@ -8,12 +8,13 @@ services:
       - path: .env
         required: true
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d postgres -U terradiscoverapi"]
+      test: ["CMD-SHELL", "pg_isready -d terradiscoverapidb -U terradiscoverapi"]
       interval: 5s
       timeout: 5s
       retries: 5
 
   app:
+    container_name: terra-discover-api-app-1
     image: terra_app
     build:
       context: .

@@ -1,27 +1,29 @@
 # 🚀 Terra Discover API
 
-A robust and scalable API built with Hono, Zod-OpenAPI, and Prisma, designed to manage information about various spaces, their features, and user interactions. This API serves as the backbone for a platform focused on discovering and exploring places.
+A robust and scalable API built with **Hono**, **Zod-OpenAPI**, and **Prisma**, designed to manage information about various spaces, their features, and user interactions. This API serves as the backbone for a platform focused on discovering and exploring places.
 
-## ✨ Features
+## ✨ Key Features
 
 - **RESTful API Endpoints**: Comprehensive routes for managing users, authentication, and various "spaces" (e.g., parks, historical sites, attractions).
 - **Built-in OpenAPI Documentation**: Self-generating API documentation using Zod-OpenAPI and Scalar, providing interactive exploration of all endpoints, schemas, and examples.
-- **Database Management**: Utilizes Prisma ORM for efficient and type-safe database interactions.
-- **Authentication & Authorization**: Secure user authentication workflows.
-- **JSON Schema Validation**: Robust input validation using Zod schemas.
-- **Fast Development Environment**: Powered by Bun for quick installations and rapid iteration.
+- **Database Management**: Utilizes the Prisma ORM for efficient and type-safe database interactions.
+- **Secure Authentication**: Robust user authentication and authorization workflows.
+- **JSON Schema Validation**: Strong input validation using Zod schemas to ensure data integrity.
+- **Fast Development Environment**: Powered by **Bun** for quick installations and rapid iteration.
 
 ## 🛠️ Technologies Used
 
 - **Framework**: [Hono](https://hono.dev/)
 - **ORM**: [Prisma](https://www.prisma.io/)
-- **Database**: PostgreSQL (or your chosen relational DB)
+- **Database**: PostgreSQL
 - **Schema Validation**: [Zod](https://zod.dev/)
 - **API Documentation**:
   - [`@hono/zod-openapi`](https://github.com/honojs/hono-zod-openapi)
   - [`@scalar/hono-api-reference`](https://github.com/scalar/scalar/tree/main/packages/hono-api-reference)
 - **Runtime/Package Manager**: [Bun](https://bun.sh/)
-- **Containerization**: [Docker](https://www.docker.com/) / [Docker Compose](https://docs.docker.com/compose/)
+- **Containerization**: [Docker](https://www.docker.com/) & [Docker Compose](https://docs.docker.com/compose/)
+
+---
 
 ## 🚀 Getting Started
 
@@ -29,7 +31,7 @@ Follow these steps to get the Terra Discover API running locally on your machine
 
 ### Prerequisites
 
-Before you begin, ensure you have the following installed:
+Ensure you have the following installed before you begin:
 
 - **Bun**: [Installation Guide](https://bun.sh/docs/installation)
 - **Docker & Docker Compose**: [Installation Guide](https://docs.docker.com/get-docker/)
@@ -58,9 +60,7 @@ The project uses environment variables for configuration (e.g., database connect
     cp .env.example .env
     ```
 2.  **Configure `.env`:**
-    Open the newly created `.env` file and fill in the necessary values. Pay close attention to `DATABASE_URL` for your local PostgreSQL setup and any API keys if applicable.
-
-    Example `.env` content (refer to `.env.example` for full details):
+    Open the `.env` file and fill in the necessary values. Refer to `.env.example` for a complete list.
 
     ```env
     # Database Configuration
@@ -76,10 +76,8 @@ This project uses Docker Compose to run a local PostgreSQL database.
     Navigate to the project root and run Docker Compose in detached mode.
 
     ```bash
-    docker-compose up -d
+    docker-compose up -d database
     ```
-
-    This will start a PostgreSQL container based on your `compose.yml` file.
 
 2.  **Run Prisma Migrations:**
     Once the database container is running, apply the Prisma migrations to set up your database schema.
@@ -93,7 +91,7 @@ This project uses Docker Compose to run a local PostgreSQL database.
     ```bash
     bun run db:generate # or 'bun prisma generate'
     ```
-    If you have seed data to populate your database with initial records:
+    Populate your database with initial records:
     ```bash
     bun run db:seed
     ```
@@ -104,7 +102,7 @@ This project uses Docker Compose to run a local PostgreSQL database.
     ```bash
     bun dev
     ```
-    The API will start running locally, typically on `http://localhost:3000` (check your console for the exact URL).
+    The API will start running locally, typically on `http://localhost:3000`.
 
 ### Accessing API Documentation
 
